@@ -23,6 +23,7 @@ public class Movement : MonoBehaviour
     void FixedUpdate()
     {
         rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+        //rb.velocity = new Vector2(movement.x*2, movement.y*2);
     }
 
     private void OnTriggerEnter2D(Collider2D other) //upon hitting something
@@ -36,10 +37,12 @@ public class Movement : MonoBehaviour
         {
             print("healing");
             attributes.GetComponent<Attributes>().Heal(10);
+            Destroy(other.gameObject); 
         }
         else if (other.tag == "xpPack") {
             print("get xp");
             attributes.GetComponent<Attributes>().gainXP(5);
+            Destroy(other.gameObject);
         }
         
     }
