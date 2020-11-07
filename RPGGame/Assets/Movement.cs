@@ -25,15 +25,21 @@ public class Movement : MonoBehaviour
         rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other) //upon hitting something
     {
         if (other.tag == "enemy")
         {
             print("attacked");
             attributes.GetComponent<Attributes>().takeDamage(10);
-        } else if (other.tag == "hpPack") {
+        }
+        else if (other.tag == "hpPack")
+        {
             print("healing");
             attributes.GetComponent<Attributes>().Heal(10);
+        }
+        else if (other.tag == "xpPack") {
+            print("get xp");
+            attributes.GetComponent<Attributes>().gainXP(5);
         }
         
     }

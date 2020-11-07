@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - enemy
+  - hpPack
+  - xpPack
   layers:
   - Default
   - TransparentFX

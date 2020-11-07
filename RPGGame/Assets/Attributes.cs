@@ -37,7 +37,7 @@ public class Attributes : MonoBehaviour
         currentHP -= hp;
         if (currentHP <= 0) {
             currentHP = 0;
-            //handle death in another script
+            //handle death in another script TODO
         }
     }
     public void gainXP(int xp) {
