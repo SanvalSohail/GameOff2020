@@ -7,6 +7,7 @@ TagManager:
   - enemy
   - hpPack
   - xpPack
+  - bullet
   layers:
   - Default
   - TransparentFX
@@ -47,6 +48,9 @@ TagManager:
   - name: bgNew Layer
     uniqueID: 507843409
     locked: 0
-  - name: player
+  - name: player+1
     uniqueID: 1556240829
+    locked: 0
+  - name: New Layer
+    uniqueID: 4087101125
     locked: 0

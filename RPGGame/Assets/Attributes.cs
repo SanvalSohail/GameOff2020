@@ -17,6 +17,14 @@ public class Attributes : MonoBehaviour
     void handleDeath() { 
         //todo
     }
+    public int getMaxHP() {
+        return maxHP;
+    }
+
+    public int getHP()
+    {
+        return currentHP;
+    }
 
     public void changeCurrency(int amount) {     //positive amount means gain money, negative means lose money
         currency += amount;
@@ -61,6 +69,7 @@ public class Attributes : MonoBehaviour
             currentHP = maxHP;
         }
     }
+    
     void Start() //on startup
     {
         maxHP = 100;
@@ -73,7 +82,7 @@ public class Attributes : MonoBehaviour
         currency = 0;
 
     }
-
+    
     // Update is called once per frame
 
     void Update()

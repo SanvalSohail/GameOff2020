@@ -56,8 +56,11 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Attributes.cs" />
+     <Compile Include="Assets\HitEvent.cs" />
      <Compile Include="Assets\Movement.cs" />
-     <Compile Include="Assets\MovementEnemy.cs" />
+     <Compile Include="Assets\contactEvent.cs" />
+     <Compile Include="Assets\hpBarScript.cs" />
+     <Compile Include="Assets\shooting.cs" />
      <None Include="Assets\BayatGames\Free Platform Game Assets\Readme.txt" />
  <Reference Include="UnityEngine">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.13f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
