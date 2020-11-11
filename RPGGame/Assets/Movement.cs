@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+//using UnityEngine.UI;
+using TMPro;
 
 public class Movement : MonoBehaviour
 {
@@ -10,8 +12,10 @@ public class Movement : MonoBehaviour
     Vector2 movement;
     Vector2 mousePos;
     public Attributes attributes;
-    public hpBarScript script;
+    //public hpBarScript script;
+    //public TextMeshPro text;
 
+    //public TMPro health;
     // Start is called before the first frame update
 
 
@@ -39,21 +43,29 @@ public class Movement : MonoBehaviour
         {
             print("attacked");
             attributes.GetComponent<Attributes>().takeDamage(10);
-            int maximum = attributes.GetComponent<Attributes>().getMaxHP();
-            int hp = attributes.GetComponent<Attributes>().getHP();
-            GameObject hpbar = GameObject.FindWithTag("hpBar");
-            hpbar.GetComponent<hpBarScript>().changeBar(hp, maximum);
+            //int maximum = attributes.GetComponent<Attributes>().getMaxHP();
+            //int hp = attributes.GetComponent<Attributes>().getHP();
+            //GameObject hpbar = GameObject.FindWithTag("hpBar");
+            //hpbar.GetComponent<hpBarScript>().changeBar(hp, maximum);
             
         }
         else if (other.tag == "hpPack")
         {
             print("healing");
             attributes.GetComponent<Attributes>().Heal(10);
+            //int maximum = attributes.GetComponent<Attributes>().getMaxHP();
+            //int hp = attributes.GetComponent<Attributes>().getHP();
+            //GameObject hpbar = GameObject.FindWithTag("hpBar");
+            //hpbar.GetComponent<hpBarScript>().changeBar(hp, maximum);
             Destroy(other.gameObject); 
         }
         else if (other.tag == "xpPack") {
             print("get xp");
             attributes.GetComponent<Attributes>().gainXP(5);
+            //int maximum = attributes.GetComponent<Attributes>().getMaxXp(); 
+            //int xp = attributes.GetComponent<Attributes>().getXP();
+            //GameObject xpbar = GameObject.FindWithTag("xpBar");
+            //xpbar.GetComponent<xpBarScript>().changeBar(xp, maximum);
             Destroy(other.gameObject);
         }
         

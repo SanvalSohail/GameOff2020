@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class HitEvent : MonoBehaviour
 {
@@ -17,10 +18,13 @@ public class HitEvent : MonoBehaviour
         print("igothit");
         if (other.tag == "bullet") {
             hp -= 10;
+            SceneManager.LoadScene(0);
         }
 
-        if (hp <= 0) {
+        if (hp <= 0) {   //this enemy died
             Destroy(gameObject);
+            GameObject player = GameObject.FindWithTag("Player");
+            player.GetComponent<Attributes>().gainXP(5);
         }
         
     }

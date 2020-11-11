@@ -8,6 +8,13 @@ TagManager:
   - hpPack
   - xpPack
   - bullet
+  - hpBar
+  - xpBar
+  - Canvas
+  - levelText
+  - fdfd
+  - HealthDisplay
+  - XpDisplay
   layers:
   - Default
   - TransparentFX
