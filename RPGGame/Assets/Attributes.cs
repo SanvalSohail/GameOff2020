@@ -2,17 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Diagnostics;
+using UnityEngine.SceneManagement;
+
 public class Attributes : MonoBehaviour
 
 {
-    static public int maxHP=100;
-    static public int currentHP=100;
-    static public int level=1; //stats will just be attack and defence power directly proportional to level, don't need their own attributes
-    static public int nextLevelXP=20;
-    static public int currentXP=0;
-    static public int currency=0;
-    static public string rangedWeapon="pistol";
-    static public string meleeWeapon="fists";
+    static public int maxHP = 100;
+    static public int currentHP = 100;
+    static public int level = 1; //stats will just be attack and defence power directly proportional to level, don't need their own attributes
+    static public int nextLevelXP = 20;
+    static public int currentXP = 0;
+    static public int currency = 0;
+    static public string rangedWeapon = "pistol";
+    static public string meleeWeapon = "fists";
+    static public int dead=0;
+
 
     public int SetmaxHP;
     public int SetcurrentHP;
@@ -23,20 +27,24 @@ public class Attributes : MonoBehaviour
     public string SetrangedWeapon;
     public string SetmeleeWeapon;
 
-    
+
     //public levelTextScript levelTextScript;
     //public hpBarScript script;
     // Start is called before the first frame update
-    void handleDeath() { 
-        //todo
+    public void refillHP()
+    {
+        currentHP = maxHP;
     }
-    public int getMaxXp() {
+    public int getMaxXp()
+    {
         return nextLevelXP;
     }
-    public int getXP() {
+    public int getXP()
+    {
         return currentXP;
     }
-    public int getMaxHP() {
+    public int getMaxHP()
+    {
         return maxHP;
     }
 
@@ -45,31 +53,39 @@ public class Attributes : MonoBehaviour
         return currentHP;
     }
 
-    public void changeCurrency(int amount) {     //positive amount means gain money, negative means lose money
+    public void changeCurrency(int amount)
+    {     //positive amount means gain money, negative means lose money
         currency += amount;
-        if (currency < 0) {
+        if (currency < 0)
+        {
             currency = 0;
         }
     }
 
-    public void switchMelee(string weapon) {
+    public void switchMelee(string weapon)
+    {
         meleeWeapon = weapon;
     }
 
-    public void switchRanged(string weapon) { 
-       rangedWeapon = weapon;
+    public void switchRanged(string weapon)
+    {
+        rangedWeapon = weapon;
     }
 
-    public void takeDamage(int hp) {
+    public void takeDamage(int hp)
+    {
         currentHP -= hp;
-        if (currentHP <= 0) {
+        if (currentHP <= 0)
+        {
+            dead = 1;
+            SceneManager.LoadScene("DeathScreen");
             currentHP = 0;
-            //handle death in another script TODO
         }
         GameObject hpbar = GameObject.FindWithTag("HealthDisplay");
         hpbar.GetComponent<hpSlider>().changeBar(currentHP, maxHP);
     }
-    public void gainXP(int xp) {
+    public void gainXP(int xp)
+    {
         currentXP += xp;
         if (currentXP >= nextLevelXP) //the level up event
         {
@@ -78,7 +94,7 @@ public class Attributes : MonoBehaviour
             level++;
             maxHP += 10;
             currentHP += 10;
-            nextLevelXP = nextLevelXP*2;
+            nextLevelXP = nextLevelXP * 2;
             GameObject levelText = GameObject.FindWithTag("levelText");
             levelText.GetComponent<levelText>().levelUp(level);
             GameObject hpbar = GameObject.FindWithTag("HealthDisplay");
@@ -92,9 +108,10 @@ public class Attributes : MonoBehaviour
 
     }
 
-    public void Heal(int hp) {
+    public void Heal(int hp)
+    {
         currentHP += hp;
-        if(currentHP > maxHP)
+        if (currentHP > maxHP)
         {
             currentHP = maxHP;
         }
@@ -102,9 +119,12 @@ public class Attributes : MonoBehaviour
         GameObject hpbar = GameObject.FindWithTag("HealthDisplay");
         hpbar.GetComponent<hpSlider>().changeBar(currentHP, maxHP);
     }
-    
+
     void Start() //on startup
     {
+        if (dead==1) {
+            currentHP = maxHP;
+        }
         GameObject hpbar = GameObject.FindWithTag("HealthDisplay");
         hpbar.GetComponent<hpSlider>().changeBar(currentHP, maxHP);
 
@@ -115,7 +135,7 @@ public class Attributes : MonoBehaviour
         levelText.GetComponent<levelText>().levelUp(level);
 
     }
-    
+
     // Update is called once per frame
 
     void Update()

@@ -61,6 +61,7 @@
      <Compile Include="Assets\contactEvent.cs" />
      <Compile Include="Assets\hpSlider.cs" />
      <Compile Include="Assets\levelText.cs" />
+     <Compile Include="Assets\reviveButtonClick.cs" />
      <Compile Include="Assets\shooting.cs" />
      <Compile Include="Assets\xpSlider.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
