@@ -15,7 +15,6 @@ public class HitEvent : MonoBehaviour
     // Update is called once per frame
     private void OnTriggerEnter2D(Collider2D other) //upon hitting something
     {
-        print("igothit");
         if (other.tag == "bullet") {
             hp -= 10;
             SceneManager.LoadScene(0);

@@ -12,60 +12,60 @@ public class Movement : MonoBehaviour
     Vector2 movement;
     Vector2 mousePos;
     public Attributes attributes;
-    //public hpBarScript script;
-    //public TextMeshPro text;
+    private bool dash = false;
+    private float dashTimer = 0;
 
     //public TMPro health;
     // Start is called before the first frame update
 
-
+        
     // Update is called once per frame
     void Update()
     {
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
+        print(movement.x);
+        print(movement.y);
         mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+        if (Input.GetKeyDown("space") && dashTimer <= 0)
+        {
+            dash = true;
+        }
+        if(dashTimer >= 0) {
+            dashTimer -= Time.deltaTime; //decrement
+        }
+        
     }
 
     //for framerate purposes
     void FixedUpdate()
     {
+        if (dash == true) {
+            movement.x *= 7;
+            movement.y *= 7;
+            dash = false;
+            dashTimer = .5f;
+        }
         rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
         Vector2 lookDir = mousePos - rb.position; //mouse position
         float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - 90f; //rotation
         rb.rotation = angle;
-        //rb.velocity = new Vector2(movement.x*2, movement.y*2);
     }
 
     private void OnTriggerEnter2D(Collider2D other) //upon hitting something
     {
         if (other.tag == "enemy")
         {
-            print("attacked");
             attributes.GetComponent<Attributes>().takeDamage(10);
-            //int maximum = attributes.GetComponent<Attributes>().getMaxHP();
-            //int hp = attributes.GetComponent<Attributes>().getHP();
-            //GameObject hpbar = GameObject.FindWithTag("hpBar");
-            //hpbar.GetComponent<hpBarScript>().changeBar(hp, maximum);
             
         }
         else if (other.tag == "hpPack")
         {
-            print("healing");
             attributes.GetComponent<Attributes>().Heal(10);
-            //int maximum = attributes.GetComponent<Attributes>().getMaxHP();
-            //int hp = attributes.GetComponent<Attributes>().getHP();
-            //GameObject hpbar = GameObject.FindWithTag("hpBar");
-            //hpbar.GetComponent<hpBarScript>().changeBar(hp, maximum);
             Destroy(other.gameObject); 
         }
         else if (other.tag == "xpPack") {
-            print("get xp");
             attributes.GetComponent<Attributes>().gainXP(5);
-            //int maximum = attributes.GetComponent<Attributes>().getMaxXp(); 
-            //int xp = attributes.GetComponent<Attributes>().getXP();
-            //GameObject xpbar = GameObject.FindWithTag("xpBar");
-            //xpbar.GetComponent<xpBarScript>().changeBar(xp, maximum);
             Destroy(other.gameObject);
         }
         
@@ -73,8 +73,7 @@ public class Movement : MonoBehaviour
 
     void Start() //on startup
     {
-            attributes = GetComponent<Attributes>();//gain access to attributes script
-       //script = GetComponent<hpBarScript>();//script code
+            attributes = GetComponent<Attributes>();
         
     }
 
