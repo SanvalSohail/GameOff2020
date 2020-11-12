@@ -3,7 +3,18 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - enemy
+  - hpPack
+  - xpPack
+  - bullet
+  - hpBar
+  - xpBar
+  - Canvas
+  - levelText
+  - fdfd
+  - HealthDisplay
+  - XpDisplay
   layers:
   - Default
   - TransparentFX
@@ -40,4 +51,13 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: bgNew Layer
+    uniqueID: 507843409
+    locked: 0
+  - name: player+1
+    uniqueID: 1556240829
+    locked: 0
+  - name: New Layer
+    uniqueID: 4087101125
     locked: 0
