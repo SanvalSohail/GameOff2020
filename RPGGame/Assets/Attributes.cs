@@ -16,6 +16,7 @@ public class Attributes : MonoBehaviour
     static public string rangedWeapon = "pistol";
     static public string meleeWeapon = "fists";
     static public int dead=0;
+    public bool invincible = false;
 
 
     public int SetmaxHP;

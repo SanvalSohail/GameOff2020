@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//using UnityEngine.UI;
+using System;
 using TMPro;
 
 public class Movement : MonoBehaviour
 {
+    public Transform transform;
     public float moveSpeed = 5f;
     public Rigidbody2D rb;
     public Camera cam;
@@ -41,11 +42,19 @@ public class Movement : MonoBehaviour
     void FixedUpdate()
     {
         if (dash == true) {
-            movement.x *= 7;
-            movement.y *= 7;
+            if (movement.x == 0 || movement.y == 0)
+            {
+                movement.x *= 20;
+                movement.y *= 20;
+            }
+            else {
+                movement.x *= 20f;
+                movement.y *= 20f;
+            }
             dash = false;
-            dashTimer = .5f;
+            dashTimer = 1f; //dash cooldown
         }
+
         rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
         Vector2 lookDir = mousePos - rb.position; //mouse position
         float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - 90f; //rotation
